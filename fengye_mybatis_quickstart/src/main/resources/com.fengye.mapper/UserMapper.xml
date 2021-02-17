@@ -7,4 +7,25 @@
     <select id="findAll" resultType="com.fengye.domain.User">
         select * from user
     </select>
+
+    <!--parameterType表示查询需要传入的参数信息；
+        resultType表示查询返回封装的结果信息；
+        #{id}：id对应实体类User中的id属性-->
+    <select id="findOneById" parameterType="java.lang.Integer" resultType="com.fengye.domain.User">
+        select * from user where id = #{id}
+    </select>
+
+    <insert id="insert" parameterType="com.fengye.domain.User">
+        insert into user values (#{id}, #{username}, #{password})
+    </insert>
+
+    <update id="update" parameterType="com.fengye.domain.User">
+        <!--注意多个修改参数之间使用","隔开，而不是用and隔开-->
+        update user set username = #{username} , password = #{password}
+        where id = #{id}
+    </update>
+
+    <delete id="deleteById" parameterType="java.lang.Integer">
+        delete from user where id = #{id}
+    </delete>
 </mapper>
