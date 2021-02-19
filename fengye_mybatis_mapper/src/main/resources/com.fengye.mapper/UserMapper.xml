@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fengye.mapper.UserMapper">
+
+    <!--公共相同的sql语句-->
+    <sql id="selectUser">
+        select * from user
+    </sql>
+
+    <select id="findByCondition" parameterType="com.fengye.domain.User" resultType="com.fengye.domain.User">
+        <include refid="selectUser"></include>
+        <where>
+            <if test="id!=0">
+              and id = #{id}
+            </if>
+            <if test="username!=null">
+              and username = #{username}
+            </if>
+            <if test="password!=null">
+              and password = #{password}
+            </if>
+        </where>
+    </select>
+
+    <select id="findByIdList" parameterType="list" resultType="com.fengye.domain.User">
+        <include refid="selectUser"></include>
+        <where>
+            <!--集合List查询collection使用list，parameterType使用java.util.List（或者简写list）-->
+            <foreach collection="list" open="id in (" close=")" separator="," item="id">
+                #{id}
+            </foreach>
+        </where>
+    </select>
+
+    <select id="findByIdArrays" parameterType="java.util.Arrays" resultType="com.fengye.domain.User">
+        <include refid="selectUser"></include>
+        <where>
+            <!--数组array查询collection使用array，parameterType使用java.util.Arrays -->
+            <foreach collection="array" open="id in (" close=")" separator="," item="id">
+                #{id}
+            </foreach>
+        </where>
+    </select>
+</mapper>

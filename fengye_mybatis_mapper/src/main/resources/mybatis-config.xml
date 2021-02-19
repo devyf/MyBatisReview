@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <!-- 引入jdbc.properties配置文件 -->
+    <properties resource="jdbc.properties"></properties>
+    <!--MyBatis数据源环境配置-->
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC"/>
+            <!-- 数据库连接配置 -->
+            <dataSource type="POOLED">
+                <property name="driver" value="${driver}"/>
+                <property name="url" value="${url}"/>
+                <property name="username" value="${username}"/>
+                <property name="password" value="${password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+    <!--加载Mapper.xml映射文件配置-->
+    <mappers>
+        <!--注意在IDEA构建Maven项目中有些特殊：resource属性不能配置成：com/fengye/mapper/UserMapper.xml-->
+        <mapper resource="com.fengye.mapper/UserMapper.xml"/>
+    </mappers>
+</configuration>
