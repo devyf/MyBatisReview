@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fengye.mapper.UserMapper">
+    <resultMap id="userRoleMap" type="user">
+        <id column="id" property="id"></id>
+        <result column="username" property="username"></result>
+        <result column="password" property="password"></result>
+        <result column="birthday" property="birthday"></result>
+        <!--用户对应多个角色List使用collection：
+            property是实体类对应的属性，
+            ofType是List中每个元素的类型
+            注意：使用ofType时，下面封装的property中不能使用role.属性；
+                  注意区分一对一中type属性的封装刚好相反-->
+        <collection property="roleList" ofType="role">
+            <id column="roleId" property="id"></id>
+            <result column="roleName" property="roleName"></result>
+            <result column="roleDesc" property="roleDesc"></result>
+        </collection>
+    </resultMap>
+
+    <select id="findAllUserRole" resultMap="userRoleMap">
+      select
+	    *
+      from
+	    sys_user u
+	  join sys_user_role ur on u.id = ur.userId
+	  join sys_role r on r.id = ur.roleId
+    </select>
+</mapper>
