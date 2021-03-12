@@ -29,4 +29,12 @@ public class UserMapperTest {
         List<User> userList = userMapper.findAllUserRole();
         System.out.println(userList);
     }
+
+    @Test
+    public void manyTomany(){
+        List<User> userList = userMapper.findAllUserRole();
+        for (User user : userList) {
+            System.out.println(user);
+        }
+    }
 }

@@ -6,17 +6,17 @@
         <!--<id column="oid" property="id"></id>-->
         <!--<result column="ordertime" property="orderTime"></result>-->
         <!--<result column="total" property="total"></result>-->
-        <!--<result column="uid" property="user.id"></result>-->
-        <!--<result column="username" property="user.username"></result>-->
-        <!--<result column="password" property="user.password"></result>-->
-        <!--<result column="birthday" property="user.birthday"></result>-->
+        <!--<result column="uid" property="customer.id"></result>-->
+        <!--<result column="username" property="customer.username"></result>-->
+        <!--<result column="password" property="customer.password"></result>-->
+        <!--<result column="birthday" property="customer.birthday"></result>-->
     <!--</resultMap>-->
 
     <resultMap id="orderMap" type="order">
         <id column="oid" property="id"></id>
         <result column="ordertime" property="orderTime"></result>
         <result column="total" property="total"></result>
-        <association property="user" javaType="user">
+        <association property="customer" javaType="customer">
             <id column="uid" property="id"></id>
             <result column="username" property="username"></result>
             <result column="password" property="password"></result>
